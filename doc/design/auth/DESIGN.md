@@ -1,7 +1,7 @@
 # Objective
 
 Design a native Swift authentication library (`GoogleCloudAuth`) inside
-`google-cloud-swift` (`packages/auth`) to serve as the unified, type-safe, and
+`google-cloud-swift` (the `GoogleCloudAuth` target in the root package) to serve as the unified, type-safe, and
 thread-safe entry point for all outgoing authenticated requests in a
 Swift-idiomatic way.
 
@@ -350,32 +350,32 @@ specifications exactly:
 
 ### Files to Add:
 
--   `packages/auth/Sources/GoogleCloudAuth/ADC.swift`: Standard Google API
+-   `Sources/GoogleCloudAuth/ADC.swift`: Standard Google API
     Improvement Proposal (AIP)-4110 file loading and evaluation logic.
--   `packages/auth/Sources/GoogleCloudAuth/TokenCache.swift`: Actor-based token
+-   `Sources/GoogleCloudAuth/TokenCache.swift`: Actor-based token
     caching and task-sharing implementation.
--   `packages/auth/Sources/GoogleCloudAuth/Http/AuthHTTPClient.swift`:
+-   `Sources/GoogleCloudAuth/Http/AuthHTTPClient.swift`:
     Centralized secure and Linux-compatible HTTP request dispatcher.
--   `packages/auth/Sources/GoogleCloudAuth/Providers/UserCredentials.swift`:
+-   `Sources/GoogleCloudAuth/Providers/UserCredentials.swift`:
     Encapsulates User OAuth2 provider facade.
--   `packages/auth/Sources/GoogleCloudAuth/Providers/ServiceAccountCredentials.swift`:
+-   `Sources/GoogleCloudAuth/Providers/ServiceAccountCredentials.swift`:
     Encapsulates Service Account provider facade.
--   `packages/auth/Sources/GoogleCloudAuth/Providers/MDSCredentials.swift`:
+-   `Sources/GoogleCloudAuth/Providers/MDSCredentials.swift`:
     Encapsulates Metadata Server provider facade.
 
 ### Files to Delete:
 
--   `packages/auth/rust_auth_core/`
--   `packages/auth/Sources/RustAuthCoreBridge/`
--   `packages/auth/Sources/RustAuthCoreFFI/`
+-   Former `rust_auth_core/` directory from the standalone auth package
+-   `Sources/RustAuthCoreBridge/`
+-   `Sources/RustAuthCoreFFI/`
 
 ### Files to Modify:
 
--   `packages/auth/Package.swift`:
+-   `Package.swift`:
     -   Remove legacy shims and declarations.
     -   Declare `GoogleCloudAuth` as a pure Swift target depending on project
         crypto utilities for Linux compatibility.
--   `packages/auth/Sources/GoogleCloudAuth/Credentials.swift`: Rewrite to use
+-   `Sources/GoogleCloudAuth/Credentials.swift`: Rewrite to use
     native providers.
 
 --------------------------------------------------------------------------------

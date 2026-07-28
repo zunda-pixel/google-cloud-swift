@@ -21,79 +21,254 @@ let package = Package(
   platforms: [
     .macOS(.v15)
   ],
+  products: [
+    .library(name: "GoogleCloudAuth", targets: ["GoogleCloudAuth"]),
+    .library(name: "GoogleCloudGax", targets: ["GoogleCloudGax"]),
+    .library(name: "GoogleCloudStorage", targets: ["GoogleCloudStorage"]),
+    .library(name: "GoogleCloudTestHelpers", targets: ["GoogleCloudTestHelpers"]),
+    .library(name: "GoogleCloudWkt", targets: ["GoogleCloudWkt"]),
+    .library(name: "GoogleCloudWktConvert", targets: ["GoogleCloudWktConvert"]),
+    .library(name: "GoogleCloudComputeV1", targets: ["GoogleCloudComputeV1"]),
+    .library(name: "GoogleCloudLocation", targets: ["GoogleCloudLocation"]),
+    .library(name: "GoogleCloudSecretmanagerV1", targets: ["GoogleCloudSecretmanagerV1"]),
+    .library(name: "GoogleCloudSecurityPubliccaV1", targets: ["GoogleCloudSecurityPubliccaV1"]),
+    .library(name: "GoogleCloudWorkflowsV1", targets: ["GoogleCloudWorkflowsV1"]),
+    .library(name: "GoogleIamV1", targets: ["GoogleIamV1"]),
+    .library(name: "GoogleLongrunning", targets: ["GoogleLongrunning"]),
+    .library(name: "GoogleRpc", targets: ["GoogleRpc"]),
+    .library(name: "GoogleType", targets: ["GoogleType"]),
+    .library(name: "UserGuide", targets: ["UserGuide"]),
+  ],
   traits: [
-    "IntegrationTests"
+    "IntegrationTests",
+    .trait(name: "GlobalOperations"),
+    .trait(name: "Images", enabledTraits: ["GlobalOperations"]),
+    .trait(name: "Instances", enabledTraits: ["ZoneOperations"]),
+    .trait(name: "ZoneOperations"),
+    .default(enabledTraits: ["Images", "Instances"]),
   ],
   dependencies: [
-    // Reference local packages via paths
-    .package(path: "./packages/auth"),
-    .package(
-      path: "./packages/gax",
-      traits: [
-        .trait(name: "IntegrationTests", condition: .when(traits: ["IntegrationTests"]))
-      ]),
-    .package(path: "./packages/test-helpers"),
-    .package(path: "./packages/wkt"),
-    .package(path: "./packages/storage"),
-    .package(path: "./guide"),
-    .package(
-      path: "./generated/google-cloud-compute-v1",
-      traits: ["Instances", "Images", "ZoneOperations"]),
-    .package(path: "./generated/google-cloud-location"),
-    .package(path: "./generated/google-iam-v1"),
-    .package(path: "./generated/google-cloud-secretmanager-v1"),
-    .package(path: "./generated/google-cloud-security-publicca-v1"),
-    .package(path: "./generated/google-cloud-workflows-v1"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
-    // Used in the integration tests.
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "4.0.0"),
     .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.10.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
+    .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.28.2"),
+    .package(url: "https://github.com/apple/swift-system.git", from: "1.0.0"),
+    .package(url: "https://github.com/grpc/grpc-swift.git", from: "1.23.0"),
+    .package(url: "https://github.com/swift-extras/swift-extras-base64", from: "1.0.0"),
+    .package(url: "https://github.com/vapor/jwt-kit.git", from: "5.0.0"),
   ],
   targets: [
-    .testTarget(
-      name: "IntegrationTests",
+    .target(
+      name: "GoogleCloudAuth",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth")
+        .product(name: "JWTKit", package: "jwt-kit"),
+        .product(name: "SystemPackage", package: "swift-system"),
+      ]),
+    .target(
+      name: "GoogleCloudWkt",
+      dependencies: [
+        .product(name: "ExtrasBase64", package: "swift-extras-base64")
+      ]),
+    .target(
+      name: "GoogleCloudWktConvert",
+      dependencies: [
+        "GoogleCloudWkt",
+        .product(name: "SwiftProtobuf", package: "swift-protobuf"),
+      ]),
+    .target(
+      name: "GoogleRpc",
+      dependencies: ["GoogleCloudWkt"],
+      path: "generated/google-rpc/Sources/GoogleRpc"),
+    .target(
+      name: "GoogleType",
+      dependencies: ["GoogleCloudWkt"],
+      path: "generated/google-type/Sources/GoogleType"),
+    .target(
+      name: "GoogleCloudGax",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudWkt",
+        "GoogleRpc",
+        .product(name: "Logging", package: "swift-log"),
+      ]),
+    .target(
+      name: "GoogleLongrunning",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        "GoogleRpc",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-longrunning/Sources/GoogleLongrunning"),
+    .target(
+      name: "GoogleCloudLocation",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-cloud-location/Sources/GoogleCloudLocation"),
+    .target(
+      name: "GoogleIamV1",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        "GoogleType",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-iam-v1/Sources/GoogleIamV1"),
+    .target(
+      name: "GoogleCloudComputeV1",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-cloud-compute-v1/Sources/GoogleCloudComputeV1"),
+    .target(
+      name: "GoogleCloudSecretmanagerV1",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudLocation",
+        "GoogleCloudWkt",
+        "GoogleIamV1",
+        "GoogleRpc",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-cloud-secretmanager-v1/Sources/GoogleCloudSecretmanagerV1"),
+    .target(
+      name: "GoogleCloudSecurityPubliccaV1",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path:
+        "generated/google-cloud-security-publicca-v1/Sources/GoogleCloudSecurityPubliccaV1"),
+    .target(
+      name: "GoogleCloudWorkflowsV1",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudLocation",
+        "GoogleCloudWkt",
+        "GoogleLongrunning",
+        "GoogleRpc",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "generated/google-cloud-workflows-v1/Sources/GoogleCloudWorkflowsV1"),
+    .target(
+      name: "StorageControlProtos",
+      dependencies: [
+        .product(name: "GRPC", package: "grpc-swift"),
+        .product(name: "SwiftProtobuf", package: "swift-protobuf"),
+      ]),
+    .target(
+      name: "GoogleCloudStorage",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        "GoogleCloudWktConvert",
+        "GoogleRpc",
+        "GoogleType",
+        "StorageControlProtos",
+        .product(name: "Crypto", package: "swift-crypto"),
+        .product(name: "Logging", package: "swift-log"),
+        .product(name: "SwiftProtobuf", package: "swift-protobuf"),
+      ]),
+    .target(
+      name: "GoogleCloudTestHelpers",
+      dependencies: [
+        "GoogleCloudGax",
+        .product(name: "InMemoryLogging", package: "swift-log"),
+      ]),
+    .target(
+      name: "UserGuide",
+      dependencies: [
+        "GoogleCloudAuth",
+        "GoogleCloudGax",
+        "GoogleCloudSecretmanagerV1",
+        .product(name: "Logging", package: "swift-log"),
+      ],
+      path: "guide/Sources/UserGuide",
+      exclude: ["UserGuide.docc"]),
+    .testTarget(
+      name: "GoogleCloudAuthTests",
+      dependencies: [
+        "GoogleCloudAuth",
+        .product(name: "JWTKit", package: "jwt-kit"),
       ]),
     .testTarget(
+      name: "GoogleCloudAuthIntegrationTests",
+      dependencies: ["GoogleCloudAuth"]),
+    .testTarget(
+      name: "GoogleCloudGaxTests",
+      dependencies: [
+        "GoogleCloudGax",
+        "GoogleRpc",
+      ]),
+    .testTarget(
+      name: "GoogleCloudGaxIntegrationTests",
+      dependencies: ["GoogleCloudGax"]),
+    .testTarget(
+      name: "GoogleCloudStorageTests",
+      dependencies: [
+        "GoogleCloudStorage",
+        "StorageControlProtos",
+      ]),
+    .testTarget(
+      name: "GoogleCloudStorageIntegrationTests",
+      dependencies: ["GoogleCloudStorage"]),
+    .testTarget(
+      name: "GoogleCloudWktTests",
+      dependencies: [
+        "GoogleCloudWkt",
+        "GoogleCloudWktConvert",
+        .product(name: "SwiftProtobuf", package: "swift-protobuf"),
+      ]),
+    .testTarget(
+      name: "IntegrationTests",
+      dependencies: ["GoogleCloudAuth"]),
+    .testTarget(
       name: "AllModules",
-      dependencies: [.product(name: "UserGuide", package: "guide")]),
+      dependencies: ["UserGuide"]),
     .testTarget(
       name: "Discovery",
-      dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
-      ],
+      dependencies: ["GoogleCloudWkt"],
       exclude: ["disco/"]),
     .testTarget(
       name: "ProtoJSON",
       dependencies: [
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
       ],
       exclude: ["protos/"]),
     .testTarget(
       name: "DiscoveryBasedClient",
       dependencies: [
-        .product(name: "GoogleCloudComputeV1", package: "google-cloud-compute-v1"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleCloudTestHelpers", package: "test-helpers"),
+        "GoogleCloudComputeV1",
+        "GoogleCloudWkt",
+        "GoogleCloudTestHelpers",
       ],
       exclude: ["README.md"]),
     .testTarget(
       name: "ProtoBasedClient",
       dependencies: [
-        .product(
-          name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
-        .product(
-          name: "GoogleCloudWorkflowsV1", package: "google-cloud-workflows-v1"),
-        .product(
-          name: "GoogleCloudLocation", package: "google-cloud-location"),
-        .product(
-          name: "GoogleIamV1", package: "google-iam-v1"),
-        .product(
-          name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleCloudStorage", package: "storage"),
-        .product(name: "GoogleCloudTestHelpers", package: "test-helpers"),
+        "GoogleCloudLocation",
+        "GoogleCloudSecretmanagerV1",
+        "GoogleCloudStorage",
+        "GoogleCloudTestHelpers",
+        "GoogleCloudWkt",
+        "GoogleCloudWorkflowsV1",
+        "GoogleIamV1",
         .product(name: "CryptoSwift", package: "CryptoSwift"),
         .product(name: "InMemoryLogging", package: "swift-log"),
       ],
@@ -101,16 +276,15 @@ let package = Package(
     .testTarget(
       name: "Any",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleCloudSecretmanagerV1", package: "google-cloud-secretmanager-v1"),
+        "GoogleCloudWkt",
+        "GoogleCloudSecretmanagerV1",
       ]),
     .testTarget(
       name: "QueryParameter",
       dependencies: [
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(
-          name: "GoogleCloudSecurityPubliccaV1", package: "google-cloud-security-publicca-v1"),
+        "GoogleCloudGax",
+        "GoogleCloudWkt",
+        "GoogleCloudSecurityPubliccaV1",
       ]),
   ]
 )

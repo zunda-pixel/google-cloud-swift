@@ -36,13 +36,13 @@ default:
         path: generated/google-api
         api_package: google.api
       - name: GoogleCloudAuth
-        path: packages/auth
+        path: .
         required_by_services: true
       - name: GoogleCloudCommon
         path: generated/google-cloud-common
         api_package: google.cloud.common
       - name: GoogleCloudGax
-        path: packages/gax
+        path: .
         required_by_services: true
       - name: GoogleCloudGkehubConfigmanagementV1
         path: generated/google-cloud-gkehub-configmanagement-v1
@@ -66,7 +66,7 @@ default:
         path: generated/google-cloud-osconfig-v1
         api_package: google.cloud.osconfig.v1
       - name: GoogleCloudWkt
-        path: packages/wkt
+        path: .
         api_package: google.protobuf
       - name: GoogleGrafeasV1
         path: generated/grafeas-v1
@@ -174,10 +174,10 @@ libraries:
   - name: google-cloud-auth
     version: 0.0.0-preview
     copyright_year: "2026"
-    output: packages/auth/Sources/GoogleCloudAuth/generated
+    output: Sources/GoogleCloudAuth/generated
     swift:
       modules:
-        - output: packages/auth/Sources/GoogleCloudAuth/generated
+        - output: Sources/GoogleCloudAuth/generated
           api_path: ""
           module_type: package-version
   - name: google-cloud-baremetalsolution-v2
@@ -337,10 +337,10 @@ libraries:
   - name: google-cloud-gax
     version: 0.0.0-preview
     copyright_year: "2026"
-    output: packages/gax/Sources/GoogleCloudGax/generated
+    output: Sources/GoogleCloudGax/generated
     swift:
       modules:
-        - output: packages/gax/Sources/GoogleCloudGax/generated
+        - output: Sources/GoogleCloudGax/generated
           api_path: ""
           module_type: package-version
   - name: google-cloud-gkebackup-logging-v1
@@ -432,10 +432,10 @@ libraries:
   - name: google-cloud-storage
     version: 0.0.0-preview
     copyright_year: "2026"
-    output: packages/storage/Sources/generated/StorageControlProtos
+    output: Sources/StorageControlProtos
     swift:
       modules:
-        - output: packages/storage/Sources/generated/StorageControlProtos
+        - output: Sources/StorageControlProtos
           api_path: google/storage/control/v2
           module_type: swift-protobuf
           include_list:
@@ -447,7 +447,7 @@ libraries:
             - ../../../rpc/status.proto
             - ../../../type/expr.proto
             - ../../../type/interval.proto
-        - output: packages/storage/Sources/GoogleCloudStorage/generated
+        - output: Sources/GoogleCloudStorage/generated
           api_path: google/storage/control/v2
           module_type: convert-swift
           module_path: StorageControlProtos
@@ -475,7 +475,7 @@ libraries:
   - name: google-cloud-wkt
     version: 0.0.0-preview
     copyright_year: "2026"
-    output: packages/wkt/Sources/GoogleCloudWkt/generated
+    output: Sources/GoogleCloudWkt/generated
     roots:
       - protobuf-src
     swift:
@@ -484,10 +484,10 @@ libraries:
         - type.proto
         - source_context.proto
       modules:
-        - output: packages/wkt/Sources/GoogleCloudWkt/generated/messages
+        - output: Sources/GoogleCloudWkt/generated/messages
           api_path: google/protobuf
           module_type: default
-        - output: packages/wkt/Sources/GoogleCloudWkt/generated/version
+        - output: Sources/GoogleCloudWkt/generated/version
           api_path: google/protobuf
           module_type: package-version
   - name: google-cloud-workflows-executions-v1

@@ -24,10 +24,7 @@ let package = Package(
     .library(name: "GoogleApiServicecontrolV2", targets: ["GoogleApiServicecontrolV2"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-rpc"),
+    .package(path: "../.."),
     .package(path: "../../generated/google-rpc-context"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
@@ -35,10 +32,10 @@ let package = Package(
     .target(
       name: "GoogleApiServicecontrolV2",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
         .product(name: "GoogleRpcContext", package: "google-rpc-context"),
         .product(name: "Logging", package: "swift-log"),
       ],

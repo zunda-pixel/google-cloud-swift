@@ -24,34 +24,28 @@ let package = Package(
     .library(name: "GoogleCloudAssetV1", targets: ["GoogleCloudAssetV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
+    .package(path: "../.."),
     .package(path: "../../generated/google-cloud-orgpolicy-v1"),
     .package(path: "../../generated/google-cloud-osconfig-v1"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-iam-v1"),
     .package(path: "../../generated/google-identity-accesscontextmanager-v1"),
-    .package(path: "../../generated/google-longrunning"),
-    .package(path: "../../generated/google-rpc"),
-    .package(path: "../../generated/google-type"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudAssetV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
         .product(name: "GoogleCloudOrgpolicyV1", package: "google-cloud-orgpolicy-v1"),
         .product(name: "GoogleCloudOsconfigV1", package: "google-cloud-osconfig-v1"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleIamV1", package: "google-iam-v1"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleIamV1", package: "google-cloud-swift"),
         .product(
           name: "GoogleIdentityAccesscontextmanagerV1",
           package: "google-identity-accesscontextmanager-v1"),
-        .product(name: "GoogleLongrunning", package: "google-longrunning"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
-        .product(name: "GoogleType", package: "google-type"),
+        .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
+        .product(name: "GoogleType", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

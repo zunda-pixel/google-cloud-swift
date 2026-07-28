@@ -24,22 +24,18 @@ let package = Package(
     .library(name: "GoogleCloudGkehubV1", targets: ["GoogleCloudGkehubV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
+    .package(path: "../.."),
     .package(path: "../../generated/google-cloud-gkehub-configmanagement-v1"),
     .package(path: "../../generated/google-cloud-gkehub-multiclusteringress-v1"),
     .package(path: "../../generated/google-cloud-gkehub-rbacrolebindingactuation-v1"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-longrunning"),
-    .package(path: "../../generated/google-rpc"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudGkehubV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
         .product(
           name: "GoogleCloudGkehubConfigmanagementV1",
           package: "google-cloud-gkehub-configmanagement-v1"),
@@ -49,9 +45,9 @@ let package = Package(
         .product(
           name: "GoogleCloudGkehubRbacrolebindingactuationV1",
           package: "google-cloud-gkehub-rbacrolebindingactuation-v1"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleLongrunning", package: "google-longrunning"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

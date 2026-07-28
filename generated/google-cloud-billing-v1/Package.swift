@@ -24,22 +24,18 @@ let package = Package(
     .library(name: "GoogleCloudBillingV1", targets: ["GoogleCloudBillingV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-iam-v1"),
-    .package(path: "../../generated/google-type"),
+    .package(path: "../.."),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudBillingV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleIamV1", package: "google-iam-v1"),
-        .product(name: "GoogleType", package: "google-type"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleIamV1", package: "google-cloud-swift"),
+        .product(name: "GoogleType", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

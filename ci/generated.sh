@@ -28,32 +28,31 @@ count=0
 
 # This is a subset of the generated code, because it is too slow to build
 # everything.
-generated=(
-  "generated/google-cloud-secretmanager-v1"
-  "generated/google-cloud-security-publicca-v1"
+targets=(
+  "GoogleCloudSecretmanagerV1"
+  "GoogleCloudSecurityPubliccaV1"
 )
 flags=(
     -Xswiftc -warnings-as-errors
     -Xswiftc -Wwarning
     -Xswiftc DeprecatedDeclaration
 )
-for dir in "${generated[@]}"; do
-    [[ -f "${dir}/Package.swift" ]] || continue
+for target in "${targets[@]}"; do
     count=$((count + 1))
 
-    echo "::group:: --- Building ${dir} ---"
-    if swift build --build-tests "${flags[@]}" --package-path "${dir}"; then
-        echo "::info:: ✓ ${dir} built"
+    echo "::group:: --- Building ${target} ---"
+    if swift build "${flags[@]}" --target "${target}"; then
+        echo "::info:: ✓ ${target} built"
         echo "::endgroup::"
     else
         echo "::endgroup::"
-        echo "::error:: ✗ ${dir} failed to build" >&2
+        echo "::error:: ✗ ${target} failed to build" >&2
         errors=$((errors + 1))
     fi
 done
 
 echo ""
-echo "${count} local package(s) tested, ${errors} failure(s)."
+echo "${count} generated target(s) built, ${errors} failure(s)."
 
 if [[ ${errors} -gt 0 ]]; then
     exit 1

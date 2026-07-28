@@ -25,22 +25,19 @@ let package = Package(
       name: "GoogleCloudBinaryauthorizationV1", targets: ["GoogleCloudBinaryauthorizationV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../packages/wkt"),
+    .package(path: "../.."),
     .package(path: "../../generated/grafeas-v1"),
-    .package(path: "../../generated/google-iam-v1"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudBinaryauthorizationV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
         .product(name: "GoogleGrafeasV1", package: "grafeas-v1"),
-        .product(name: "GoogleIamV1", package: "google-iam-v1"),
+        .product(name: "GoogleIamV1", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

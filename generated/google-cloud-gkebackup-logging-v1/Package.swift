@@ -24,15 +24,14 @@ let package = Package(
     .library(name: "GoogleCloudGkebackupLoggingV1", targets: ["GoogleCloudGkebackupLoggingV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-rpc"),
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleCloudGkebackupLoggingV1",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
       ],
     )
   ]
