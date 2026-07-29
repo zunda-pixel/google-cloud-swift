@@ -18,10 +18,10 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudKmsV1",
+  name: "GoogleCloudKMSV1",
   platforms: [.macOS(.v15)],
   products: [
-    .library(name: "GoogleCloudKmsV1", targets: ["GoogleCloudKmsV1"])
+    .library(name: "GoogleCloudKMSV1", targets: ["GoogleCloudKMSV1"])
   ],
   dependencies: [
     .package(path: "../.."),
@@ -29,13 +29,13 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "GoogleCloudKmsV1",
+      name: "GoogleCloudKMSV1",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
         .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
         .product(name: "GoogleCloudLocation", package: "google-cloud-swift"),
         .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
-        .product(name: "GoogleIamV1", package: "google-cloud-swift"),
+        .product(name: "GoogleIAMV1", package: "google-cloud-swift"),
         .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
         .product(name: "GoogleRpc", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),

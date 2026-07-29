@@ -17,15 +17,15 @@
 
 // snippet.show
 import Foundation
-import GoogleCloudSecurityPrivatecaV1
+import GoogleCloudSecurityPrivateCAV1
 import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
+import GoogleIAMV1
 import GoogleLongrunning
 import GoogleRpc
 
 func sample(projectId: String, locationId: String, caPoolId: String, ) async throws {
-  let client = try GoogleCloudSecurityPrivatecaV1.CertificateAuthorityServiceClient()
+  let client = try GoogleCloudSecurityPrivateCAV1.CertificateAuthorityServiceClient()
   let items = try client.listCertificates(
     byItem: ListCertificatesRequest()
       .with {

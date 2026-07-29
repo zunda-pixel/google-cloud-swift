@@ -29,8 +29,8 @@ count=0
 # This is a subset of the generated code, because it is too slow to build
 # everything.
 targets=(
-  "GoogleCloudSecretmanagerV1"
-  "GoogleCloudSecurityPubliccaV1"
+  "GoogleCloudSecretManagerV1"
+  "GoogleCloudSecurityPublicCAV1"
 )
 flags=(
     -Xswiftc -warnings-as-errors

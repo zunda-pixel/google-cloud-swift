@@ -21,7 +21,7 @@ set -euo pipefail
 # The PRs are too slow if we run them for all packages. We YOLO the PRs and just
 # run this build for the hand-crafted files and some select GAPICs. The post-PR
 # build will run for everything, we can afford those to be slower.
-if [[ "$1" == "push" ]]; then
+if [[ "${1:-}" == "push" ]]; then
     paths=(
         "Sources"
         "Tests"

@@ -17,10 +17,10 @@
 
 // snippet.show
 import Foundation
-import GoogleCloudSecretmanagerV1
+import GoogleCloudSecretManagerV1
 import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
+import GoogleIAMV1
 
 func sample(client: SecretManagerServiceClient, projectId: String) async throws {
   let items = try client.listSecrets(
@@ -39,7 +39,7 @@ func sample(client: SecretManagerServiceClient, projectId: String) async throws 
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudSecretmanagerV1.SecretManagerServiceClient()
+      let client = try GoogleCloudSecretManagerV1.SecretManagerServiceClient()
       try await sample(client: client, projectId: "[placeholder]")
     } catch {
       print("Error: \(error)")

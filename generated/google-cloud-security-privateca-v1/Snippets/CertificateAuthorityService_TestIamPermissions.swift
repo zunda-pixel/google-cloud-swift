@@ -17,16 +17,16 @@
 
 // snippet.show
 import Foundation
-import GoogleCloudSecurityPrivatecaV1
+import GoogleCloudSecurityPrivateCAV1
 import GoogleCloudLocation
 import GoogleCloudWkt
-import GoogleIamV1
+import GoogleIAMV1
 import GoogleLongrunning
 import GoogleRpc
 
 func sample(client: CertificateAuthorityServiceClient) async throws {
   let response = try await client.testIamPermissions(
-    request: GoogleIamV1.TestIamPermissionsRequest()
+    request: GoogleIAMV1.TestIamPermissionsRequest()
       /* set fields using .with { $0... } */
   )
   print("Success: \(response)")
@@ -37,7 +37,7 @@ func sample(client: CertificateAuthorityServiceClient) async throws {
 struct SnippetRunner {
   static func main() async throws {
     do {
-      let client = try GoogleCloudSecurityPrivatecaV1.CertificateAuthorityServiceClient()
+      let client = try GoogleCloudSecurityPrivateCAV1.CertificateAuthorityServiceClient()
       try await sample(client: client)
     } catch {
       print("Error: \(error)")

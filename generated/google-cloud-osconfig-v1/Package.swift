@@ -18,10 +18,10 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudOsconfigV1",
+  name: "GoogleCloudOSConfigV1",
   platforms: [.macOS(.v15)],
   products: [
-    .library(name: "GoogleCloudOsconfigV1", targets: ["GoogleCloudOsconfigV1"])
+    .library(name: "GoogleCloudOSConfigV1", targets: ["GoogleCloudOSConfigV1"])
   ],
   dependencies: [
     .package(path: "../.."),
@@ -29,7 +29,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "GoogleCloudOsconfigV1",
+      name: "GoogleCloudOSConfigV1",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
         .product(name: "GoogleCloudGax", package: "google-cloud-swift"),

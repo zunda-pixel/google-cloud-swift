@@ -30,10 +30,10 @@ let package = Package(
     .library(name: "GoogleCloudWktConvert", targets: ["GoogleCloudWktConvert"]),
     .library(name: "GoogleCloudComputeV1", targets: ["GoogleCloudComputeV1"]),
     .library(name: "GoogleCloudLocation", targets: ["GoogleCloudLocation"]),
-    .library(name: "GoogleCloudSecretmanagerV1", targets: ["GoogleCloudSecretmanagerV1"]),
-    .library(name: "GoogleCloudSecurityPubliccaV1", targets: ["GoogleCloudSecurityPubliccaV1"]),
+    .library(name: "GoogleCloudSecretManagerV1", targets: ["GoogleCloudSecretManagerV1"]),
+    .library(name: "GoogleCloudSecurityPublicCAV1", targets: ["GoogleCloudSecurityPublicCAV1"]),
     .library(name: "GoogleCloudWorkflowsV1", targets: ["GoogleCloudWorkflowsV1"]),
-    .library(name: "GoogleIamV1", targets: ["GoogleIamV1"]),
+    .library(name: "GoogleIAMV1", targets: ["GoogleIAMV1"]),
     .library(name: "GoogleLongrunning", targets: ["GoogleLongrunning"]),
     .library(name: "GoogleRpc", targets: ["GoogleRpc"]),
     .library(name: "GoogleType", targets: ["GoogleType"]),
@@ -802,7 +802,7 @@ let package = Package(
       ],
       path: "generated/google-cloud-location/Sources/GoogleCloudLocation"),
     .target(
-      name: "GoogleIamV1",
+      name: "GoogleIAMV1",
       dependencies: [
         "GoogleCloudAuth",
         "GoogleCloudGax",
@@ -810,7 +810,7 @@ let package = Package(
         "GoogleType",
         .product(name: "Logging", package: "swift-log"),
       ],
-      path: "generated/google-iam-v1/Sources/GoogleIamV1"),
+      path: "generated/google-iam-v1/Sources/GoogleIAMV1"),
     .target(
       name: "GoogleCloudComputeV1",
       dependencies: [
@@ -821,19 +821,19 @@ let package = Package(
       ],
       path: "generated/google-cloud-compute-v1/Sources/GoogleCloudComputeV1"),
     .target(
-      name: "GoogleCloudSecretmanagerV1",
+      name: "GoogleCloudSecretManagerV1",
       dependencies: [
         "GoogleCloudAuth",
         "GoogleCloudGax",
         "GoogleCloudLocation",
         "GoogleCloudWkt",
-        "GoogleIamV1",
+        "GoogleIAMV1",
         "GoogleRpc",
         .product(name: "Logging", package: "swift-log"),
       ],
-      path: "generated/google-cloud-secretmanager-v1/Sources/GoogleCloudSecretmanagerV1"),
+      path: "generated/google-cloud-secretmanager-v1/Sources/GoogleCloudSecretManagerV1"),
     .target(
-      name: "GoogleCloudSecurityPubliccaV1",
+      name: "GoogleCloudSecurityPublicCAV1",
       dependencies: [
         "GoogleCloudAuth",
         "GoogleCloudGax",
@@ -841,7 +841,7 @@ let package = Package(
         .product(name: "Logging", package: "swift-log"),
       ],
       path:
-        "generated/google-cloud-security-publicca-v1/Sources/GoogleCloudSecurityPubliccaV1"),
+        "generated/google-cloud-security-publicca-v1/Sources/GoogleCloudSecurityPublicCAV1"),
     .target(
       name: "GoogleCloudWorkflowsV1",
       dependencies: [
@@ -885,7 +885,7 @@ let package = Package(
       dependencies: [
         "GoogleCloudAuth",
         "GoogleCloudGax",
-        "GoogleCloudSecretmanagerV1",
+        "GoogleCloudSecretManagerV1",
         .product(name: "Logging", package: "swift-log"),
       ],
       path: "guide/Sources/UserGuide"),
@@ -952,12 +952,12 @@ let package = Package(
       name: "ProtoBasedClient",
       dependencies: [
         "GoogleCloudLocation",
-        "GoogleCloudSecretmanagerV1",
+        "GoogleCloudSecretManagerV1",
         "GoogleCloudStorage",
         "GoogleCloudTestHelpers",
         "GoogleCloudWkt",
         "GoogleCloudWorkflowsV1",
-        "GoogleIamV1",
+        "GoogleIAMV1",
         .product(name: "CryptoSwift", package: "CryptoSwift"),
         .product(name: "InMemoryLogging", package: "swift-log"),
       ],
@@ -966,14 +966,14 @@ let package = Package(
       name: "Any",
       dependencies: [
         "GoogleCloudWkt",
-        "GoogleCloudSecretmanagerV1",
+        "GoogleCloudSecretManagerV1",
       ]),
     .testTarget(
       name: "QueryParameter",
       dependencies: [
         "GoogleCloudGax",
         "GoogleCloudWkt",
-        "GoogleCloudSecurityPubliccaV1",
+        "GoogleCloudSecurityPublicCAV1",
       ]),
   ]
 )

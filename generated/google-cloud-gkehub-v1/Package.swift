@@ -35,16 +35,16 @@ let package = Package(
       name: "GoogleCloudGkehubV1",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
-        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
         .product(
-          name: "GoogleCloudGkehubConfigmanagementV1",
+          name: "GoogleCloudGKEHubConfigManagementV1",
           package: "google-cloud-gkehub-configmanagement-v1"),
         .product(
-          name: "GoogleCloudGkehubMulticlusteringressV1",
+          name: "GoogleCloudGKEHubMultiClusterIngressV1",
           package: "google-cloud-gkehub-multiclusteringress-v1"),
         .product(
-          name: "GoogleCloudGkehubRbacrolebindingactuationV1",
+          name: "GoogleCloudGKEHubRBACRoleBindingActuationV1",
           package: "google-cloud-gkehub-rbacrolebindingactuation-v1"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
         .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
         .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
         .product(name: "GoogleRpc", package: "google-cloud-swift"),

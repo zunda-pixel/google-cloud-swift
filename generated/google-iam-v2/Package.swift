@@ -18,10 +18,10 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleIamV2",
+  name: "GoogleIAMV2",
   platforms: [.macOS(.v15)],
   products: [
-    .library(name: "GoogleIamV2", targets: ["GoogleIamV2"])
+    .library(name: "GoogleIAMV2", targets: ["GoogleIAMV2"])
   ],
   dependencies: [
     .package(path: "../.."),
@@ -29,7 +29,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "GoogleIamV2",
+      name: "GoogleIAMV2",
       dependencies: [
         .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
         .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
