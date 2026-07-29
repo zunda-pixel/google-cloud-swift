@@ -68,7 +68,7 @@ To avoid coupling the core ADC resolver with all possible credential types (and
 their heavy dependencies like Crypto), we will use a dynamic registry pattern.
 
 See
-[CredentialParserRegistry.swift](../Sources/GoogleCloudAuth/CredentialParserRegistry.swift)
+[CredentialParserRegistry.swift](../../../Sources/GoogleCloudAuth/CredentialParserRegistry.swift)
 for the protocol and the thread-safe dynamic registry pattern implementation.
 
 The ADC resolver will read the file using `JSONSerialization` (weak typing) to
@@ -81,7 +81,7 @@ specific configuration struct (e.g., `ServiceAccountCredentials` or
 
 The `CredentialsConfiguration` enum natively handles overrides using associated
 values on the `.adc` case without breaking existing usage. See
-[Credentials.swift](../Sources/GoogleCloudAuth/Credentials.swift) for the enum
+[Credentials.swift](../../../Sources/GoogleCloudAuth/Credentials.swift) for the enum
 implementation.
 
 -   `quotaProjectID`: Manually sets the quota project ID. This is overridden by
