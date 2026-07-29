@@ -24,20 +24,17 @@ let package = Package(
     .library(name: "GoogleCloudBigqueryConnectionV1", targets: ["GoogleCloudBigqueryConnectionV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-iam-v1"),
+    .package(path: "../.."),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudBigqueryConnectionV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleIAMV1", package: "google-iam-v1"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleIAMV1", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

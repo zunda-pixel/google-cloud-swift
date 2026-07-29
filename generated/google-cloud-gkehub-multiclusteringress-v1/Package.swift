@@ -26,13 +26,13 @@ let package = Package(
       targets: ["GoogleCloudGKEHubMultiClusterIngressV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt")
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleCloudGKEHubMultiClusterIngressV1",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift")
       ],
     )
   ]

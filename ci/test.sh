@@ -16,59 +16,22 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-
 echo "--- SWIFT VERSION ---"
 swift --version
 echo "--- VERSIONS ---"
 
-errors=0
-count=0
-
-# macOS ships with Bash 3.x, which does not support readfile. Use a plain
-# assignment as a workaround, and set IFS to avoid breaking on spaces.
-IFS=$'\n'
-packages=($(git ls-files -- 'Package.swift' 'packages/*Package.swift' 'guide/*Package.swift' | xargs -I{} dirname {} | sort))
-unset IFS
 flags=(
     -Xswiftc -warnings-as-errors
     -Xswiftc -Wwarning
     -Xswiftc DeprecatedDeclaration
-    --scratch-path "$(git rev-parse --show-toplevel)/.build-cache"
-    --build-path "$(git rev-parse --show-toplevel)/.build"
 )
-for dir in "${packages[@]}"; do
-    [[ -f "${dir}/Package.swift" ]] || continue
-    # TODO(https://github.com/googleapis/google-cloud-swift/issues/3) - restore these builds.
-    [[ "${dir}" != "packages/storage" ]] || continue
-    count=$((count + 1))
 
-    echo "::group::--- Building ${dir} ---"
-    if swift build --build-tests "${flags[@]}" --package-path "${dir}"; then
-        echo "::info:: ✓ ${dir} built"
-    else
-        echo "::endgroup::"
-        echo "::error:: ✗ ${dir} failed to build" >&2
-        errors=$((errors + 1))
-        continue
-    fi
+echo "::group::--- Building root package ---"
+swift build --build-tests "${flags[@]}"
+echo "::endgroup::"
 
-    [[ -d "${dir}/Tests" ]] || continue
-    echo "::info:: --- Testing ${dir} ---"
-    if swift test "${flags[@]}" --quiet --package-path "${dir}"; then
-        echo "::notice:: ✓ ${dir} passed"
-        echo "::endgroup::"
-    else
-        echo "::endgroup::"
-        echo "::error:: ✗ ${dir} failed"
-        errors=$((errors + 1))
-    fi
-done
-
-echo ""
-echo "::notice:: ${count} local package(s) tested, ${errors} failure(s)."
-
-if [[ ${errors} -gt 0 ]]; then
-    exit 1
-fi
+echo "::group::--- Testing root package ---"
+# TODO(https://github.com/googleapis/google-cloud-swift/issues/3) - restore
+# GoogleCloudStorageTests when their environment-independent setup is fixed.
+swift test "${flags[@]}" --quiet --skip GoogleCloudStorageTests
+echo "::endgroup::"

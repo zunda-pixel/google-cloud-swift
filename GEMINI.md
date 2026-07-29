@@ -19,11 +19,11 @@ This document outlines critical rules, coding standards, and workflow practices 
 
 - **Swift Testing Framework**: Always use `import Testing` for tests. Never use `import XCTest`.
 - **Test Organization**: Group all the unit tests for a class or struct under a `@Suite struct` structure, named for the struct or class under test.
-- **Targeted Testing**: Prefer testing packages individually instead of the entire monorepo tree to save build time. Use:
+- **Targeted Testing**: Prefer filtering to the relevant root-package test target to save build time. Use:
   ```bash
-  swift test --package-path packages/${package_name}
+  swift test --filter ${target_name}
   ```
-- **Global Validation**: To perform full validation on all packages (formatting, linting, test coverage), examine the workflow scripts in the `ci/` directory (`ci/lint.sh`, `ci/test.sh`).
+- **Global Validation**: To perform full validation on the root package (formatting, linting, test coverage), examine the workflow scripts in the `ci/` directory (`ci/lint.sh`, `ci/test.sh`).
 - **Integration Tests**: Integration tests require explicit Google Cloud credentials and are restricted behind traits. Use:
   ```bash
   env GOOGLE_CLOUD_PROJECT="<your-project>" swift test --traits IntegrationTests

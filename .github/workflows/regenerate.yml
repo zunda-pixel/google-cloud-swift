@@ -49,5 +49,6 @@ jobs:
           go run github.com/googleapis/librarian/cmd/librarian@${V} version || \
           go run github.com/googleapis/librarian/cmd/librarian@${V} version
           go run github.com/googleapis/librarian/cmd/librarian@${V} generate --all
+          python3 ci/normalize-generated-manifests.py
       - name: Detect drift
         run: git diff --exit-code

@@ -26,30 +26,24 @@ let package = Package(
       targets: ["GoogleIdentityAccessContextManagerV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-iam-v1"),
+    .package(path: "../.."),
     .package(path: "../../generated/google-identity-accesscontextmanager-type"),
-    .package(path: "../../generated/google-longrunning"),
-    .package(path: "../../generated/google-rpc"),
-    .package(path: "../../generated/google-type"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleIdentityAccessContextManagerV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleIAMV1", package: "google-iam-v1"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleIAMV1", package: "google-cloud-swift"),
         .product(
           name: "GoogleIdentityAccessContextManagerType",
           package: "google-identity-accesscontextmanager-type"),
-        .product(name: "GoogleLongrunning", package: "google-longrunning"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
-        .product(name: "GoogleType", package: "google-type"),
+        .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
+        .product(name: "GoogleType", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

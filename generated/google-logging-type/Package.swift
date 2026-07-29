@@ -24,13 +24,13 @@ let package = Package(
     .library(name: "GoogleLoggingType", targets: ["GoogleLoggingType"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt")
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleLoggingType",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift")
       ],
     )
   ]

@@ -24,13 +24,13 @@ let package = Package(
     .library(name: "GoogleCloudCommon", targets: ["GoogleCloudCommon"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt")
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleCloudCommon",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift")
       ],
     )
   ]

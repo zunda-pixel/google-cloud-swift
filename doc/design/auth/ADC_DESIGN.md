@@ -68,7 +68,7 @@ To avoid coupling the core ADC resolver with all possible credential types (and
 their heavy dependencies like Crypto), we will use a dynamic registry pattern.
 
 See
-[CredentialParserRegistry.swift](../Sources/GoogleCloudAuth/CredentialParserRegistry.swift)
+[CredentialParserRegistry.swift](../../../Sources/GoogleCloudAuth/CredentialParserRegistry.swift)
 for the protocol and the thread-safe dynamic registry pattern implementation.
 
 The ADC resolver will read the file using `JSONSerialization` (weak typing) to
@@ -81,7 +81,7 @@ specific configuration struct (e.g., `ServiceAccountCredentials` or
 
 The `CredentialsConfiguration` enum natively handles overrides using associated
 values on the `.adc` case without breaking existing usage. See
-[Credentials.swift](../Sources/GoogleCloudAuth/Credentials.swift) for the enum
+[Credentials.swift](../../../Sources/GoogleCloudAuth/Credentials.swift) for the enum
 implementation.
 
 -   `quotaProjectID`: Manually sets the quota project ID. This is overridden by
@@ -100,16 +100,16 @@ optimization and behavior.
 
 # Implementation details
 
--   `packages/auth/Sources/GoogleCloudAuth/ADCPath.swift`: Handles AIP-4110 path
+-   `Sources/GoogleCloudAuth/ADCPath.swift`: Handles AIP-4110 path
     precedence.
--   `packages/auth/Sources/GoogleCloudAuth/ADCResolver.swift`: Reads raw JSON
+-   `Sources/GoogleCloudAuth/ADCResolver.swift`: Reads raw JSON
     file data from the resolved path.
--   `packages/auth/Sources/GoogleCloudAuth/ADC.swift`: Orchestrates JSON
+-   `Sources/GoogleCloudAuth/ADC.swift`: Orchestrates JSON
     decoding, quota project injection, and registry delegation.
--   `packages/auth/Sources/GoogleCloudAuth/CredentialParserRegistry.swift`:
+-   `Sources/GoogleCloudAuth/CredentialParserRegistry.swift`:
     Contains the `CredentialParserRegistry` class and `CredentialSourceParser`
     protocol.
--   `packages/auth/Sources/GoogleCloudAuth/Credentials.swift`: Maintains the
+-   `Sources/GoogleCloudAuth/Credentials.swift`: Maintains the
     public `CredentialsConfiguration` enum.
 
 # Testing Parity
@@ -117,7 +117,7 @@ optimization and behavior.
 The native Swift implementation will map directly to the established test
 suites:
 
-### Unit Tests (`packages/auth/Tests/ADCResolverTests.swift` & `ADCPathTests.swift`)
+### Unit Tests (`Tests/GoogleCloudAuthTests/ADCResolverTests.swift` & `ADCPathTests.swift`)
 
 -   **Path Resolution**: `adc_well_known_path_windows`,
     `adc_well_known_path_posix`, `adc_path_from_env`

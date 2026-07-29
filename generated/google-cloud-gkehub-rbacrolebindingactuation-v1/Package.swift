@@ -26,13 +26,13 @@ let package = Package(
       targets: ["GoogleCloudGKEHubRBACRoleBindingActuationV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt")
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleCloudGKEHubRBACRoleBindingActuationV1",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift")
       ],
     )
   ]

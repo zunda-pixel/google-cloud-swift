@@ -24,26 +24,20 @@ let package = Package(
     .library(name: "GoogleCloudConfigV1", targets: ["GoogleCloudConfigV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/auth"),
-    .package(path: "../../packages/gax"),
-    .package(path: "../../generated/google-cloud-location"),
-    .package(path: "../../packages/wkt"),
-    .package(path: "../../generated/google-iam-v1"),
-    .package(path: "../../generated/google-longrunning"),
-    .package(path: "../../generated/google-rpc"),
+    .package(path: "../.."),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
     .target(
       name: "GoogleCloudConfigV1",
       dependencies: [
-        .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleCloudGax", package: "gax"),
-        .product(name: "GoogleCloudLocation", package: "google-cloud-location"),
-        .product(name: "GoogleCloudWkt", package: "wkt"),
-        .product(name: "GoogleIAMV1", package: "google-iam-v1"),
-        .product(name: "GoogleLongrunning", package: "google-longrunning"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleCloudAuth", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudGax", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudLocation", package: "google-cloud-swift"),
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift"),
+        .product(name: "GoogleIAMV1", package: "google-cloud-swift"),
+        .product(name: "GoogleLongrunning", package: "google-cloud-swift"),
+        .product(name: "GoogleRpc", package: "google-cloud-swift"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

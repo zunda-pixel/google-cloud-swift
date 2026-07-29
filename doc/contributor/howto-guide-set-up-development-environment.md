@@ -107,17 +107,16 @@ swift build
 swift test
 ```
 
-## Run the unit tests for a specific package
+## Run the unit tests for a specific target
 
 ```bash
-swift test --quiet --package-path packages/gax
+swift test --quiet --filter GoogleCloudGaxTests
 ```
 
 ## Sharing a build cache
 
-By default, when using `--package-path` does not reuse the build results for
-common libraries like `swift-crypto` or `gax`. You can add a build cache using
-`--scratch-path` to a common directory.
+All local modules are targets in the root package and share the same build
+cache. You can place that cache in a custom directory using `--scratch-path`.
 
 For example, if using `bash`, you set this in your startup scripts:
 
@@ -129,13 +128,13 @@ alias stest='swift test --scratch-path $(git rev-parse --show-toplevel)/.build-c
 Then use these aliases to speed up testing:
 
 ```bash
-stest --package-path packages/wkt
+stest --filter GoogleCloudWktTests
 ```
 
 or to verify the generated code compiles:
 
 ```bash
-stest --package-path generated/google-cloud-secretmanager-v1
+swift build --target GoogleCloudSecretmanagerV1
 ```
 
 You can customize these aliases even further. Consider
@@ -147,11 +146,11 @@ You can customize these aliases even further. Consider
 
 ## Exhaustive builds and tests
 
-Our repository will become too large to build all the packages. The previous
-commands only build the default set of packages.
+Our repository will become too large to build every generated library. The
+previous commands build the targets registered in the root package.
 
 If you make a large change, for example, use a new version of the generator,
-consider testing all the packages.
+consider expanding the generated targets in the root package before testing.
 
 ```bash
 ci/test.sh

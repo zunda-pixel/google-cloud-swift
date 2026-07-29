@@ -25,13 +25,13 @@ let package = Package(
       name: "GoogleCloudGKEHubConfigManagementV1", targets: ["GoogleCloudGKEHubConfigManagementV1"])
   ],
   dependencies: [
-    .package(path: "../../packages/wkt")
+    .package(path: "../.."),
   ],
   targets: [
     .target(
       name: "GoogleCloudGKEHubConfigManagementV1",
       dependencies: [
-        .product(name: "GoogleCloudWkt", package: "wkt")
+        .product(name: "GoogleCloudWkt", package: "google-cloud-swift")
       ],
     )
   ]
